@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Speaking 6.5</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Microsoft YaHei",sans-serif;background:#f5f7fb;color:#222}
+header{background:linear-gradient(135deg,#3157d5,#7657e8);color:white;padding:25px 18px}
+h1{margin:0 0 8px;font-size:27px}
+.container{max-width:900px;margin:auto;padding:18px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+nav button{background:white;color:#3157d5}
+.card{background:white;border-radius:16px;padding:18px;margin:15px 0;box-shadow:0 4px 18px #00000010}
+.q{font-size:18px;font-weight:bold;margin-bottom:12px}
+.answer{line-height:1.7}
+.cn{background:#f0f3ff;padding:12px;border-radius:10px;margin-top:12px;line-height:1.6}
+.tag{display:inline-block;background:#e9edff;color:#3157d5;padding:5px 9px;border-radius:15px;margin:4px;font-size:12px}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.actions button{background:#edf0f7}
+.primary{background:#3157d5!important;color:white}
+.search{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+.progress{height:10px;background:#ddd;border-radius:10px;overflow:hidden}
+.bar{height:100%;background:#3157d5;width:0}
+.hidden{display:none}
+textarea{width:100%;min-height:100px;border:1px solid #ddd;border-radius:10px;padding:12px;font-size:15px}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<h1>🎓 IELTS Speaking 6.5</h1>
+<p>雅思口语 Part 1 / Part 2 / Part 3 学习网站</p>
+
+<nav>
+<button onclick="show('home')">🏠 首页</button>
+<button onclick="show('part1')">📚 Part 1</button>
+<button onclick="show('practice')">🎤 口语练习</button>
+<button onclick="show('fav')">⭐ 我的收藏</button>
+</nav>
+</div>
+</header>
+
+<main class="container">
+
+<section id="home">
+<div class="card">
+<h2>欢迎来到 IELTS Speaking 6.5</h2>
+<p>当前话题：<b>Study</b></p>
+<p>这里提供适合雅思 6.5 左右水平的参考答案。不要死记答案，建议理解后用自己的经历替换内容。</p>
+
+<h3>学习进度</h3>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<p id="progress">0 / 11</p>
+
+<button class="primary" onclick="show('part1')">开始学习</button>
+</div>
+</section>
+
+<section id="part1" class="hidden">
+
+<input class="search" id="search"
+placeholder="搜索题目、答案或词汇..."
+oninput="render()">
+
+<div id="list"></div>
+
+</section>
+
+<section id="practice" class="hidden">
+<div class="card">
+<h2>🎤 随机口语练习</h2>
+
+<h3 id="pq">点击下面按钮开始</h3>
+
+<button class="primary" onclick="randomQ()">开始练习</button>
+<button onclick="listenQ()">🔊 听题目</button>
+
+<br><br>
+
+<textarea id="myanswer"
+placeholder="先不要看答案，在这里记录你的回答……"></textarea>
+
+<p>💡 建议：先回答 20～40 秒，再查看参考答案。</p>
+</div>
+</section>
+
+<section id="fav" class="hidden">
+<div class="card">
+<h2>⭐ 我的收藏</h2>
+<div id="favorites"></div>
+</div>
+</section>
+
+</main>
+
+<script>
+
+const data=[
+
+{
+q:"Do you work or are you a student?",
+a:"I'm a student at the moment. I'm studying at a university, and my major is related to mechanical engineering. I spend most of my time attending classes, doing assignments and working on projects.",
+c:"我目前是一名学生。我在大学学习，专业与机械工程有关。大部分时间用来上课、完成作业和做项目。",
+w:["at the moment","be related to","work on projects"]
+},
+
+{
+q:"What subject are you studying?",
+a:"I'm studying mechanical engineering. It mainly involves things like mechanical design, manufacturing and materials. We also have some practical courses, which I find quite useful.",
+c:"我学习的是机械工程，主要涉及机械设计、制造和材料等方面。我们也有一些实践课程，我觉得这些课程非常有用。",
+w:["mechanical design","manufacturing","practical courses"]
+},
+
+{
+q:"Why did you choose that subject?",
+a:"I chose this subject because I've always been interested in how machines work. Also, mechanical engineering is quite practical, and I think it can give me more career opportunities in the future.",
+c:"我选择这个专业是因为我一直对机器是如何工作的很感兴趣。此外，机械工程非常实用，我认为它能给我未来带来更多职业机会。",
+w:["be interested in","quite practical","career opportunities"]
+},
+
+{
+q:"What would you like to do in the future?",
+a:"I'd like to find a job related to mechanical engineering after graduation. I'm particularly interested in mechanical design and manufacturing. In the long term, I'd like to gain some work experience and become a professional engineer.",
+c:"毕业后，我想找一份与机械工程相关的工作。我尤其对机械设计和制造感兴趣。从长远来看，我希望积累工作经验，成为一名专业工程师。",
+w:["after graduation","in the long term","gain experience"]
+},
+
+{
+q:"What are the most popular subjects in China?",
+a:"I think subjects like computer science, business and engineering are quite popular in China. Many students choose them because they can provide relatively good career opportunities. In recent years, subjects related to artificial intelligence and information technology have also become very popular.",
+c:"我认为计算机科学、商科和工程在中国比较受欢迎。很多学生选择这些专业，因为它们能提供比较好的职业机会。近年来，人工智能和信息技术相关专业也越来越受欢迎。",
+w:["relatively good","career opportunities","in recent years"]
+},
+
+{
+q:"Do you think it's important to choose a subject you like?",
+a:"Yes, definitely. If you study something you are interested in, it's usually easier to stay motivated, especially when the subject becomes difficult. However, I think career prospects are also important, so students should consider both their interests and future opportunities.",
+c:"是的，当然。如果学习自己感兴趣的东西，通常更容易保持动力，尤其是在课程变难的时候。不过，职业前景也很重要，所以学生应该同时考虑兴趣和未来机会。",
+w:["stay motivated","career prospects","consider both"]
+},
+
+{
+q:"Are you looking forward to working?",
+a:"Yes, I am. I'm looking forward to putting what I've learned at university into practice. I also want to become financially independent and learn how to work with other people.",
+c:"是的。我期待把大学里学到的知识应用到实践中。我也希望能够经济独立，并学习如何与其他人一起工作。",
+w:["look forward to","put into practice","financially independent"]
+},
+
+{
+q:"Do you like your subject? Why?",
+a:"Yes, I do. I like it because it's a combination of theory and practical work. Sometimes the calculations can be quite difficult, but I feel a sense of achievement when I solve a problem or finish a design.",
+c:"是的，我喜欢。因为它结合了理论和实践。有时候计算会比较困难，但当我解决一个问题或完成一个设计时，我会有很强的成就感。",
+w:["a combination of","sense of achievement","solve a problem"]
+},
+
+{
+q:"Do you prefer to study in the mornings or in the afternoons?",
+a:"I prefer studying in the morning. I usually feel more energetic and focused after I wake up, so I can learn things more efficiently. In the afternoon, I sometimes get a little tired, especially after several classes.",
+c:"我更喜欢早上学习。起床后我通常更有精力，也更专注，所以学习效率更高。下午有时会有点累，尤其是上了几节课之后。",
+w:["feel energetic","focused","efficiently"]
+},
+
+{
+q:"Is your subject interesting to you?",
+a:"Yes, I think it's quite interesting. What I like most is that we can use what we learn to solve real-world problems. For example, we can design a mechanical part and think about how to make it stronger or more efficient.",
+c:"是的，我觉得很有趣。我最喜欢的是，我们可以用所学知识解决现实中的问题。例如，我们可以设计一个机械零件，然后思考如何让它更坚固或更高效。",
+w:["real-world problems","mechanical part","more efficient"]
+},
+
+{
+q:"Is there any kind of technology you can use in study?",
+a:"Yes, definitely. I often use my laptop and some engineering software for my studies. For example, CAD software is very useful for mechanical design, and I also use online resources and AI tools when I need to understand a difficult topic.",
+c:"当然。我经常使用笔记本电脑和一些工程软件学习。例如，CAD软件对机械设计非常有用。当我需要理解困难的话题时，我也会使用在线资源和AI工具。",
+w:["engineering software","online resources","AI tools"]
+}
+
+];
+
+let done=JSON.parse(localStorage.getItem("done")||"[]");
+let fav=JSON.parse(localStorage.getItem("fav")||"[]");
+let current=-1;
+
+function show(id){
+
+document.querySelectorAll("main section")
+.forEach(x=>x.classList.add("hidden"));
+
+document.getElementById(id).classList.remove("hidden");
+
+if(id=="part1")render();
+if(id=="fav")renderFav();
+
+update();
+
+}
+
+function render(){
+
+let key=(document.getElementById("search")?.value||"").toLowerCase();
+
+let box=document.getElementById("list");
+box.innerHTML="";
+
+data.forEach((x,i)=>{
+
+if(!(x.q+x.a+x.c+x.w.join(" "))
+.toLowerCase().includes(key))return;
+
+let div=document.createElement("div");
+
+div.className="card";
+
+div.innerHTML=`
+
+<div class="q">${i+1}. ${x.q}</div>
+
+<div class="answer">
+<b>Answer:</b><br>${x.a}
+</div>
+
+<div class="cn">
+<b>中文：</b>${x.c}
+</div>
+
+<div>
+${x.w.map(w=>`<span class="tag">${w}</span>`).join("")}
+</div>
+
+<div class="actions">
+
+<button onclick="speak(${i})">
+🔊 播放答案
+</button>
+
+<button onclick="finish(${i})">
+${done.includes(i)?"✅ 已完成":"☑ 标记完成"}
+</button>
+
+<button onclick="favorite(${i})">
+${fav.includes(i)?"⭐ 已收藏":"☆ 收藏"}
+</button>
+
+</div>
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+function speak(i){
+
+speechSynthesis.cancel();
+
+let u=new SpeechSynthesisUtterance(data[i].a);
+
+u.lang="en-US";
+
+speechSynthesis.speak(u);
+
+}
+
+function finish(i){
+
+if(done.includes(i))
+done=done.filter(x=>x!=i);
+else
+done.push(i);
+
+localStorage.setItem("done",JSON.stringify(done));
+
+render();
+update();
+
+}
+
+function favorite(i){
+
+if(fav.includes(i))
+fav=fav.filter(x=>x!=i);
+else
+fav.push(i);
+
+localStorage.setItem("fav",JSON.stringify(fav));
+
+render();
+renderFav();
+
+}
+
+function renderFav(){
+
+let box=document.getElementById("favorites");
+
+if(!fav.length){
+
+box.innerHTML="<p>还没有收藏题目。</p>";
+
+return;
+
+}
+
+box.innerHTML=fav.map(i=>
+`<p><b>${i+1}. ${data[i].q}</b></p>`
+).join("");
+
+}
+
+function update(){
+
+let p=Math.round(done.length/data.length*100);
+
+document.getElementById("bar").style.width=p+"%";
+
+document.getElementById("progress").innerText=
+done.length+" / "+data.length+" 已完成";
+
+}
+
+function randomQ(){
+
+current=Math.floor(Math.random()*data.length);
+
+document.getElementById("pq").innerText=data[current].q;
+
+document.getElementById("myanswer").value="";
+
+}
+
+function listenQ(){
+
+if(current<0)return;
+
+speechSynthesis.cancel();
+
+let u=new SpeechSynthesisUtterance(data[current].q);
+
+u.lang="en-US";
+
+speechSynthesis.speak(u);
+
+}
+
+show("home");
+
+</script>
+
+</body>
+</html>
