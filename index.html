@@ -258,144 +258,138 @@ main{
 .btn{
   border:0;
   border-radius:9px;
-  padding:9px 12px;
+  padding:8px 11px;
   cursor:pointer;
   font-size:13px;
+  background:#e8eef9;
+  color:#1e3a8a;
 }
 
-.btn-blue{
+.btn:hover{
+  opacity:.85;
+}
+
+.btn.primary{
   background:#2563eb;
   color:white;
 }
 
-.btn-green{
-  background:#dcfce7;
-  color:#166534;
+.btn.success{
+  background:#16a34a;
+  color:white;
 }
 
-.btn-yellow{
+.btn.favorite{
   background:#fef3c7;
   color:#92400e;
 }
 
-.btn-gray{
-  background:#e5e7eb;
-  color:#374151;
-}
-
-.btn-red{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.completed{
-  opacity:.72;
-}
-
-.completed .question-title{
-  text-decoration:line-through;
-}
-
-.favorite{
-  color:#dc2626;
-}
-
-.progress-wrap{
-  margin-top:10px;
-  height:9px;
-  background:#e5e7eb;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,#2563eb,#7c3aed);
-  width:0%;
-  transition:.3s;
-}
-
-.practice-box{
+.topic-header{
   background:white;
-  padding:20px;
   border-radius:17px;
-  box-shadow:0 4px 16px rgba(15,23,42,.06);
-}
-
-.practice-question{
-  font-size:20px;
-  font-weight:700;
-  margin:15px 0;
-}
-
-textarea{
-  width:100%;
-  min-height:170px;
-  resize:vertical;
-  padding:14px;
-  border:1px solid #d6dce8;
-  border-radius:12px;
-  font-size:16px;
-  font-family:inherit;
-}
-
-textarea:focus{
-  outline:none;
-  border-color:#2563eb;
-}
-
-.notice{
-  background:#eff6ff;
-  border-left:4px solid #2563eb;
-  padding:13px 15px;
-  border-radius:8px;
-  margin:15px 0;
-  font-size:14px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 3px 15px rgba(15,23,42,.06);
 }
 
 .back-btn{
-  margin-bottom:15px;
+  border:0;
+  background:#eef2ff;
+  color:#3730a3;
+  border-radius:9px;
+  padding:8px 12px;
+  cursor:pointer;
+  margin-bottom:12px;
+}
+
+.topic-header h2{
+  margin:0;
+  color:#1e40af;
+}
+
+.practice-card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 4px 18px rgba(15,23,42,.07);
+}
+
+.practice-question{
+  font-size:21px;
+  font-weight:700;
+  margin:12px 0 18px;
+}
+
+.practice-answer{
+  background:#f8fafc;
+  padding:16px;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.hidden{
+  display:none;
 }
 
 .empty{
   background:white;
-  padding:30px;
+  border-radius:16px;
+  padding:30px 20px;
   text-align:center;
-  border-radius:15px;
   color:#64748b;
+}
+
+.progress-wrap{
+  margin-top:15px;
+}
+
+.progress-bar{
+  height:10px;
+  background:#e2e8f0;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar span{
+  display:block;
+  height:100%;
+  background:#2563eb;
+  border-radius:20px;
+  width:0%;
+  transition:.3s;
 }
 
 footer{
   text-align:center;
-  color:#94a3b8;
-  font-size:12px;
-  padding:25px;
+  color:#64748b;
+  padding:30px 15px;
+  font-size:13px;
 }
 
 @media(max-width:700px){
-  header{
-    padding:19px 12px 15px;
-  }
-
-  header h1{
-    font-size:22px;
-  }
-
-  main{
-    padding:14px 10px 45px;
-  }
-
   .topic-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:9px;
-  }
-
-  .topic-btn{
-    padding:13px 11px;
   }
 
   .stats{
     grid-template-columns:repeat(3,1fr);
+  }
+
+  header h1{
+    font-size:23px;
+  }
+
+  .practice-question{
+    font-size:19px;
+  }
+}
+
+@media(max-width:420px){
+  .topic-grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
     gap:7px;
   }
 
@@ -405,24 +399,6 @@ footer{
 
   .stat strong{
     font-size:21px;
-  }
-
-  .question-card{
-    padding:15px;
-  }
-
-  .question-title{
-    font-size:16px;
-  }
-
-  .practice-question{
-    font-size:18px;
-  }
-}
-
-@media(max-width:400px){
-  .topic-grid{
-    grid-template-columns:1fr;
   }
 }
 </style>
@@ -436,33 +412,34 @@ footer{
     <p>雅思口语 6.5 原创学习系统</p>
 
     <nav>
-      <button class="active" onclick="showPage('home',this)">🏠 首页</button>
-      <button onclick="showPage('part1',this)">📚 Part 1</button>
-      <button onclick="showPage('practice',this)">🎤 随机练习</button>
-      <button onclick="showPage('favorites',this)">❤️ 收藏</button>
+      <button class="active" onclick="showPage('home',this)">首页</button>
+      <button onclick="showPage('part1',this)">Part 1</button>
+      <button onclick="showPage('practice',this)">随机练习</button>
+      <button onclick="showPage('favorites',this)">我的收藏</button>
     </nav>
   </div>
 </header>
 
 <main>
 
-<!-- ================= 首页 ================= -->
-
 <section id="home" class="page active">
 
   <div class="hero">
-    <h2>雅思口语 6.5 学习系统</h2>
+    <h2>IELTS Speaking 6.5</h2>
+
     <p>
-      目标：用自然、清晰、有细节的英语回答 IELTS Speaking Part 1。
+      以自然、清晰、容易记忆的方式练习雅思口语。
     </p>
+
     <p>
-      不需要死背答案，重点学习<strong>回答结构 + 常用表达 + 自然扩展</strong>。
+      <strong>6.5 答题思路：</strong>
+      先回答问题 → 给一个原因 → 加一个具体细节。
     </p>
 
     <div class="stats">
       <div class="stat">
         <strong id="totalCount">141</strong>
-        <span>总题数</span>
+        <span>题目</span>
       </div>
 
       <div class="stat">
@@ -471,32 +448,31 @@ footer{
       </div>
 
       <div class="stat">
-        <strong id="favCount">0</strong>
+        <strong id="favoriteCount">0</strong>
         <span>收藏</span>
       </div>
     </div>
 
     <div class="progress-wrap">
-      <div class="progress-bar" id="mainProgress"></div>
+      <div class="progress-bar">
+        <span id="progressBar"></span>
+      </div>
     </div>
   </div>
 
-  <div class="notice">
-    💡 <strong>6.5 答题思路：</strong>
-    先回答问题 → 给一个原因 → 加一个具体细节。
-    不要每道题都背成完全一样的模板。
-  </div>
-
   <div class="hero">
-    <h2>📚 Part 1 话题</h2>
-    <p>共 47 个话题，每个话题 3 道原创练习。</p>
+    <h2>Part 1</h2>
+
+    <p>
+      共 47 个话题，每个话题 3 道原创练习。
+    </p>
 
     <div class="search-box">
       <input
-        id="topicSearch"
+        id="searchInput"
         type="text"
-        placeholder="🔍 搜索话题，例如 Shoes、Friends、Weather..."
-        oninput="renderTopics()"
+        placeholder="搜索话题或题目……"
+        oninput="renderTopics(this.value)"
       >
     </div>
 
@@ -505,115 +481,70 @@ footer{
 
 </section>
 
-
-<!-- ================= PART 1 ================= -->
-
 <section id="part1" class="page">
 
-  <div class="hero">
-    <button class="btn btn-gray back-btn" onclick="showPage('home')">
-      ← 返回话题
-    </button>
-
-    <h2 id="topicTitle">Part 1</h2>
-    <p id="topicDescription">
-      选择一个话题开始练习。
-    </p>
-  </div>
-
-  <div id="questionsContainer"></div>
+  <div id="topicContent"></div>
 
 </section>
-
-
-<!-- ================= 随机练习 ================= -->
 
 <section id="practice" class="page">
 
   <div class="hero">
-    <h2>🎤 随机口语练习</h2>
-    <p>
-      随机抽一道 Part 1 题目，先自己回答，再查看参考答案。
-    </p>
+    <h2>随机口语练习</h2>
+    <p>随机抽取一道 Part 1 题目进行练习。</p>
   </div>
 
-  <div class="practice-box">
+  <div class="practice-card">
 
-    <div id="practiceTopic" class="topic-number"></div>
+    <div id="practiceTopic"></div>
 
     <div id="practiceQuestion" class="practice-question">
-      点击下面按钮开始
+      点击下面按钮开始练习
     </div>
 
     <div class="actions">
-      <button class="btn btn-blue" onclick="newPracticeQuestion()">
+      <button class="btn primary" onclick="newPracticeQuestion()">
         🎲 随机题目
       </button>
 
-      <button class="btn btn-blue" onclick="listenPracticeQuestion()">
-        🔊 听问题
+      <button class="btn" onclick="listenPracticeQuestion()">
+        🔊 听题目
       </button>
 
-      <button class="btn btn-red" onclick="stopSpeech()">
-        ⏹ 停止
+      <button class="btn success" onclick="showPracticeAnswer()">
+        查看参考答案
       </button>
-    </div>
 
-    <hr style="border:0;border-top:1px solid #e5e7eb;margin:20px 0">
-
-    <h3>✍️ 先自己回答</h3>
-
-    <textarea
-      id="practiceInput"
-      placeholder="Try to answer in English..."
-    ></textarea>
-
-    <div class="actions">
-      <button class="btn btn-green" onclick="showPracticeAnswer()">
-        👀 查看参考答案
+      <button class="btn" onclick="stopSpeech()">
+        ⏹ 停止朗读
       </button>
     </div>
 
-    <div id="practiceAnswer"></div>
+    <div id="practiceAnswer" class="practice-answer hidden"></div>
 
   </div>
 
 </section>
 
-
-<!-- ================= 收藏 ================= -->
-
 <section id="favorites" class="page">
 
   <div class="hero">
-    <h2>❤️ 我的收藏</h2>
-    <p>把自己觉得好用的答案收藏起来，方便反复练习。</p>
+    <h2>我的收藏</h2>
+    <p>你收藏的题目会保存在当前浏览器中。</p>
   </div>
 
-  <div id="favoriteContainer"></div>
+  <div id="favoriteList"></div>
 
 </section>
 
 </main>
 
 <footer>
-  IELTS Speaking 6.5 Study System
-  <br>
-  Original learning content for speaking practice
+  IELTS Speaking 6.5 原创学习系统
 </footer>
 
+<script>const data = [
 
-<script>
-
-/* =========================================================
-   IELTS PART 1 DATA
-   47 topics × 3 questions
-   原创 Band 6.5 参考答案
-========================================================= */
-
-const data = [
-
-/* 1 */
 {
 topic:"Study or Work",
 cn:"学习或工作",
@@ -635,11 +566,9 @@ q:"Do you have any plans for your studies in the future?",
 a:"Yes. I’d like to improve my English and learn some skills related to my future career. I’m also thinking about taking a short course because I think continuous learning is quite important nowadays.",
 c:"有。我想提高英语水平，同时学习一些与未来职业相关的技能。我还考虑参加短期课程，因为我觉得现在持续学习非常重要。",
 v:["future career","take a course","continuous learning","nowadays"]
-}
 ]
 },
 
-/* 2 */
 {
 topic:"Hometown",
 cn:"家乡",
@@ -661,11 +590,9 @@ q:"Has your hometown changed much?",
 a:"Yes, quite a lot. There are more modern buildings and better public transport than before. At the same time, some old areas have disappeared, so I sometimes miss the way my hometown used to look.",
 c:"是的，变化挺大的。现在有更多现代建筑，公共交通也比以前更好。同时，一些老城区消失了，所以我有时候会怀念以前家乡的样子。",
 v:["public transport","modern buildings","old areas","used to"]
-}
 ]
 },
 
-/* 3 */
 {
 topic:"Accommodation",
 cn:"住宿",
@@ -687,11 +614,9 @@ q:"Would you like to move to another home in the future?",
 a:"Yes, possibly. I’d like to have a slightly bigger place with more natural light. However, I wouldn’t want to move too far away because I really value convenient transport.",
 c:"可能会。我希望以后住一个稍微大一点、自然光更多的地方。不过我不想搬得太远，因为我很看重交通便利。",
 v:["slightly bigger","natural light","move away","value"]
-}
 ]
 },
 
-/* 4 */
 {
 topic:"The Area You Live In",
 cn:"居住区域",
@@ -713,11 +638,9 @@ q:"What changes have you noticed in your area?",
 a:"The biggest change is probably the number of new shops and restaurants. The area has become more convenient, especially for young people. However, it can also be a little more crowded than before.",
 c:"最大的变化可能是新商店和餐馆的数量增加了。这里变得更加方便，尤其是对年轻人来说。不过，这里也比以前稍微拥挤了一些。",
 v:["notice","new shops","convenient","crowded"]
-}
 ]
 },
 
-/* 5 */
 {
 topic:"Public Places",
 cn:"公共场所",
@@ -739,11 +662,9 @@ q:"Would you like to have more public places near your home?",
 a:"Definitely. I’d like to have more green spaces and quiet study areas. I think they would make the neighbourhood more pleasant and give people more options for spending their free time.",
 c:"当然。我希望附近有更多绿地和安静的学习空间。我觉得这些地方会让社区更加舒适，也让人们有更多方式度过空闲时间。",
 v:["green spaces","study areas","pleasant","options"]
-}
 ]
 },
 
-/* 6 */
 {
 topic:"Doing Something Well",
 cn:"把事情做好",
@@ -765,11 +686,9 @@ q:"What makes you feel that you have done something well?",
 a:"For me, it’s mainly when I can see real progress. I don’t necessarily need to get perfect results. If I know I’ve improved compared with the past, I feel satisfied.",
 c:"对我来说，主要是看到真正的进步。我不一定需要得到完美的结果。如果我知道自己比以前有所提高，我就会感到满意。",
 v:["real progress","necessarily","compared with","satisfied"]
-}
 ]
 },
 
-/* 7 */
 {
 topic:"Shoes",
 cn:"鞋子",
@@ -791,11 +710,9 @@ q:"Do you prefer fashionable shoes or comfortable shoes?",
 a:"I definitely prefer comfortable ones. Fashion is important to some extent, but if a pair of shoes hurts my feet, I probably won’t wear them very often. For me, comfort comes first.",
 c:"我肯定更喜欢舒服的鞋。时尚在一定程度上很重要，但如果一双鞋让我的脚疼，我可能不会经常穿。对我来说舒适最重要。",
 v:["to some extent","hurt my feet","wear often","come first"]
-}
 ]
 },
 
-/* 8 */
 {
 topic:"Rules",
 cn:"规则",
@@ -817,11 +734,9 @@ q:"Did you have a strict teacher when you were younger?",
 a:"Yes, I did. One of my teachers was quite strict about homework and punctuality. At the time I found it a little stressful, but looking back, I think that experience helped me become more organised.",
 c:"有。我以前的一位老师对作业和守时要求很严格。当时我觉得有点压力，但现在回头看，我觉得那段经历帮助我变得更有条理。",
 v:["strict","punctuality","looking back","organised"]
-}
 ]
 },
 
-/* 9 */
 {
 topic:"Working with Old People",
 cn:"与老年人一起工作",
@@ -843,15 +758,1855 @@ q:"What are the advantages of working with older people?",
 a:"One advantage is that they can share useful experience. They may also be more patient when solving problems. I think working with them can help younger people become more mature.",
 c:"一个好处是他们可以分享有用的经验。他们解决问题的时候可能也更有耐心。我觉得和他们一起工作可以帮助年轻人成熟起来。",
 v:["advantage","share experience","patient","mature"]
-}
 ]
-},
-
-/* 10 */
-{
+},{
 topic:"Crowded Places",
 cn:"拥挤的地方",
 questions:[
 {
 q:"Is the city where you live crowded?",
-a:"Yes, especially during rush hour. The main roads and public transport can become ve
+a:"Yes, especially during rush hour. The main roads and public transport can become very busy, but I think that is quite normal in a large city.",
+c:"是的，尤其是在高峰时间。主要道路和公共交通会变得非常拥挤，不过我觉得在大城市这是很正常的。",
+v:["rush hour","public transport","busy","large city"]
+},
+{
+q:"Do you like crowded places?",
+a:"Not really. I prefer places where I can move around comfortably and have some personal space. However, I don't mind crowded places when I go to a concert or a special event.",
+c:"不太喜欢。我更喜欢可以舒服走动并且有一些个人空间的地方。不过，如果是去音乐会或者特别活动，我不介意人多。",
+v:["personal space","move around","concert","special event"]
+},
+{
+q:"When was the last time you were in a crowded place?",
+a:"It was probably a few days ago when I went shopping. The shopping centre was very busy because it was the weekend. I didn't stay there for too long because it was a little tiring.",
+c:"应该是几天前我去购物的时候。购物中心因为是周末而非常拥挤。我没有在那里待太久，因为有点累。",
+v:["shopping centre","weekend","stay","tiring"]
+]
+},
+
+{
+topic:"Growing Vegetables",
+cn:"种植蔬菜",
+questions:[
+{
+q:"Have you ever grown vegetables?",
+a:"Yes, but only on a small scale. I once grew some tomatoes and spring onions at home. It was quite interesting to watch them grow from small plants.",
+c:"有过，但规模很小。我曾经在家里种过一些西红柿和葱。看着它们从小植物慢慢长大挺有意思的。",
+v:["on a small scale","tomatoes","spring onions","grow"]
+},
+{
+q:"Do you think growing vegetables is difficult?",
+a:"I think it depends on the type of vegetable. Some plants are quite easy to look after, while others need more sunlight and regular watering. So beginners should probably start with something simple.",
+c:"我觉得要看种什么蔬菜。有些植物比较容易照料，而另一些需要更多阳光和定期浇水。所以初学者最好从简单的开始。",
+v:["depend on","look after","regular watering","beginner"]
+},
+{
+q:"Would you like to grow vegetables in the future?",
+a:"Yes, I would. If I have a balcony or a small garden, I'd like to grow some herbs and vegetables. It would be a relaxing hobby and I could also eat what I grow.",
+c:"愿意。如果以后有阳台或者小花园，我想种一些香草和蔬菜。这会是一种放松的爱好，而且我还可以吃自己种的东西。",
+v:["balcony","garden","herbs","relaxing hobby"]
+]
+},
+
+{
+topic:"Advertising",
+cn:"广告",
+questions:[
+{
+q:"Do you often see advertisements?",
+a:"Yes, advertisements are almost everywhere nowadays. I see them on social media, websites and public transport. Some of them are useful, but many are easy to forget.",
+c:"是的，现在广告几乎无处不在。我会在社交媒体、网站和公共交通上看到广告。有些广告很有用，但很多很容易被忘记。",
+v:["advertisement","nowadays","social media","public transport"]
+},
+{
+q:"Do advertisements influence what you buy?",
+a:"Sometimes. If an advertisement introduces a product that solves a problem I have, I may become interested in it. But I usually check reviews before actually buying something.",
+c:"有时候。如果广告介绍的产品能够解决我的问题，我可能会产生兴趣。不过在真正购买之前，我通常会查看评价。",
+v:["influence","introduce","solve a problem","reviews"]
+},
+{
+q:"What kind of advertisements do you like?",
+a:"I like advertisements that are creative and informative. If an advertisement tells me something useful without being too pushy, I am more likely to remember it.",
+c:"我喜欢有创意而且有信息量的广告。如果一个广告能告诉我有用的信息，又不会太强行推销，我更容易记住它。",
+v:["creative","informative","pushy","remember"]
+]
+},
+
+{
+topic:"Chatting",
+cn:"聊天",
+questions:[
+{
+q:"Do you like chatting with your friends?",
+a:"Yes, definitely. Chatting is an easy way to keep in touch with friends, especially when we are busy. We can talk about daily life, plans and sometimes just share something funny.",
+c:"当然喜欢。聊天是和朋友保持联系的一种简单方式，尤其是在大家都很忙的时候。我们可以聊日常生活、计划，有时候也只是分享一些有趣的事情。",
+v:["keep in touch","daily life","plans","share"]
+},
+{
+q:"What do you usually talk about with your friends?",
+a:"We talk about quite ordinary things, such as study, work, food and weekend plans. Sometimes we also discuss films or videos we've watched recently.",
+c:"我们通常聊一些很普通的事情，比如学习、工作、食物和周末计划。有时候也会讨论最近看过的电影或者视频。",
+v:["ordinary","weekend plans","discuss","recently"]
+},
+{
+q:"Do you prefer chatting online or face to face?",
+a:"I prefer face-to-face conversations because they feel more natural to me. However, online chatting is much more convenient when my friends and I are in different places.",
+c:"我更喜欢面对面聊天，因为对我来说感觉更自然。不过，当朋友和我在不同地方时，网上聊天方便得多。",
+v:["face-to-face","natural","online chatting","convenient"]
+]
+},
+
+{
+topic:"Taking a Break",
+cn:"休息",
+questions:[
+{
+q:"How often do you take a break?",
+a:"I usually take short breaks every few hours when I'm studying. I might get some water, walk around or check my messages. Short breaks help me concentrate better afterwards.",
+c:"我学习的时候通常每隔几个小时休息一下。我可能会喝点水、走动一下或者看看消息。短暂休息之后，我能更好地集中注意力。",
+v:["take a break","every few hours","concentrate","afterwards"]
+},
+{
+q:"What do you usually do when you take a break?",
+a:"I usually leave my desk for a few minutes. Sometimes I listen to music or simply look out of the window. I try not to spend the whole break looking at my phone.",
+c:"我通常会离开书桌几分钟。有时候听音乐，或者简单地看看窗外。我尽量不让整个休息时间都用来看手机。",
+v:["leave my desk","look out of the window","simply","spend time"]
+},
+{
+q:"Do you think taking breaks is important?",
+a:"Yes, I do. If I work continuously for too long, my attention drops and I make more mistakes. A short break can help me feel refreshed and continue working effectively.",
+c:"是的。我觉得如果连续工作太久，注意力会下降，也更容易犯错。短暂休息可以让我恢复精神，然后更有效率地继续工作。",
+v:["continuously","attention","make mistakes","refreshed"]
+]
+},
+
+{
+topic:"Sharing",
+cn:"分享",
+questions:[
+{
+q:"What do you like to share with your friends?",
+a:"I often share interesting information, food and funny videos with my friends. If I find something that I think they will enjoy, I usually send it to them.",
+c:"我经常和朋友分享有趣的信息、食物和搞笑视频。如果发现一些我觉得他们会喜欢的东西，我通常会发给他们。",
+v:["share","interesting information","funny videos","enjoy"]
+},
+{
+q:"Did your parents teach you to share when you were a child?",
+a:"Yes. They often told me that sharing was a good way to get along with other children. I think that advice helped me become more considerate.",
+c:"是的。他们经常告诉我，分享是和其他孩子相处的一种好方式。我觉得这个建议让我变得更加体贴。",
+v:["get along with","advice","considerate","children"]
+},
+{
+q:"Do you think children should share their things?",
+a:"Yes, but I think they should also have the right to decide what they want to share. For example, sharing toys can teach children to cooperate, but personal belongings should be respected.",
+c:"我认为应该，但我觉得孩子也应该有权决定自己想分享什么。例如，分享玩具可以教孩子合作，但个人物品也应该得到尊重。",
+v:["right to decide","cooperate","personal belongings","respected"]
+]
+},
+
+{
+topic:"Plants",
+cn:"植物",
+questions:[
+{
+q:"Do you like plants?",
+a:"Yes, I do. I think plants make a room look more natural and comfortable. I especially like small plants because they don't require too much space.",
+c:"喜欢。我觉得植物能让房间看起来更自然、更舒服。我尤其喜欢小型植物，因为它们不需要太多空间。",
+v:["natural","comfortable","small plants","require space"]
+},
+{
+q:"Do you have any plants at home?",
+a:"Yes, I have a couple of small plants. I keep them near a window where they can get enough sunlight. They are quite easy to look after.",
+c:"有。我家里有几盆小植物。我把它们放在窗户附近，这样可以得到足够的阳光。它们比较容易照料。",
+v:["a couple of","near a window","sunlight","look after"]
+},
+{
+q:"Would you like to have more plants?",
+a:"Yes, especially if I have a bigger home in the future. I'd like to have a few larger plants in the living room because they could make the space feel more lively.",
+c:"愿意，尤其是以后有更大的房子。我想在客厅放几棵大一点的植物，因为它们可以让空间看起来更有生气。",
+v:["larger plants","living room","lively","in the future"]
+]
+},
+
+{
+topic:"Friends",
+cn:"朋友",
+questions:[
+{
+q:"Do you often spend time with your friends?",
+a:"Yes, although it depends on our schedules. We usually meet at weekends for a meal or coffee. When we are busy, we just keep in touch online.",
+c:"经常，不过要看我们的时间安排。我们通常周末一起吃饭或者喝咖啡。如果大家都很忙，就在线上保持联系。",
+v:["depend on","schedule","at weekends","keep in touch"]
+},
+{
+q:"What do you usually do with your friends?",
+a:"We usually have meals, go shopping or watch films together. Sometimes we don't plan anything and just walk around the city and talk.",
+c:"我们通常一起吃饭、购物或者看电影。有时候我们什么都不计划，只是在城市里走走、聊聊天。",
+v:["go shopping","watch films","walk around","plan"]
+},
+{
+q:"Is it easy for you to make new friends?",
+a:"It takes me a little time. I'm not usually the person who starts a conversation with a stranger, but once we have something in common, I can become quite talkative.",
+c:"对我来说需要一点时间。我通常不是那种主动和陌生人聊天的人，但一旦我们有共同点，我就会变得很健谈。",
+v:["make friends","start a conversation","something in common","talkative"]
+]
+},
+
+{
+topic:"Museums",
+cn:"博物馆",
+questions:[
+{
+q:"Do you often visit museums?",
+a:"Not very often, maybe a few times a year. I usually visit them when I travel because museums can help me understand the history and culture of a place.",
+c:"不是特别经常，一年可能去几次。我旅行的时候通常会去博物馆，因为博物馆能帮助我了解一个地方的历史和文化。",
+v:["a few times a year","travel","history","culture"]
+},
+{
+q:"Did you visit museums when you were a child?",
+a:"Yes, I did. My school sometimes organised visits to museums. At that age, I mainly enjoyed seeing interesting objects, rather than learning all the historical details.",
+c:"去过。学校有时候会组织博物馆参观。在那个年龄，我主要喜欢看有趣的物品，而不是了解所有历史细节。",
+v:["organise visits","at that age","objects","historical details"]
+},
+{
+q:"What kind of museums do you like?",
+a:"I prefer museums that are interactive. I enjoy exhibitions where I can touch, watch or try something instead of simply reading information from signs.",
+c:"我更喜欢互动型博物馆。我喜欢那些可以让我触摸、观看或者亲自尝试一些东西的展览，而不是只能看说明牌。",
+v:["interactive","exhibition","instead of","information signs"]
+]
+},
+
+{
+topic:"Going Out",
+cn:"外出",
+questions:[
+{
+q:"Do you often go out?",
+a:"Yes, but it depends on how busy I am. I usually go out to have meals, meet friends or simply take a walk. I don't need to go somewhere special every time.",
+c:"会，但要看我有多忙。我通常出去吃饭、见朋友或者简单地散散步。我不需要每次都去什么特别的地方。",
+v:["go out","depends on","take a walk","somewhere special"]
+},
+{
+q:"Where do you usually go when you go out?",
+a:"I usually go to nearby shopping areas, cafés or parks. I prefer places that are easy to reach because I don't want to spend too much time travelling.",
+c:"我通常去附近的购物区、咖啡馆或者公园。我更喜欢容易到达的地方，因为我不想花太多时间在路上。",
+v:["shopping area","café","easy to reach","spend time"]
+},
+{
+q:"Do you prefer going out alone or with friends?",
+a:"It depends on my mood. If I want to relax, I prefer going out alone. But if I want to have fun or try a new restaurant, I'd rather go with friends.",
+c:"要看我的心情。如果我想放松，我更喜欢一个人出去。但如果我想玩得开心或者尝试新餐厅，我更愿意和朋友一起去。",
+v:["depend on my mood","relax","try a restaurant","rather"]
+]
+},
+
+{
+topic:"Flowers",
+cn:"花",
+questions:[
+{
+q:"Do you like flowers?",
+a:"Yes, I do. I think flowers can make a place feel brighter and more pleasant. I don't know much about different types, but I enjoy looking at them.",
+c:"喜欢。我觉得花可以让一个地方变得更加明亮和舒服。我不太了解不同花的种类，但我喜欢欣赏它们。",
+v:["brighter","pleasant","types","look at"]
+},
+{
+q:"What kind of flowers do you like?",
+a:"I like simple flowers with soft colours. I don't have a strong preference, but I think flowers that look natural are particularly attractive.",
+c:"我喜欢颜色柔和、比较简单的花。我没有特别强烈的偏好，但我觉得看起来比较自然的花尤其漂亮。",
+v:["soft colours","preference","natural","attractive"]
+},
+{
+q:"Have you ever bought flowers for someone?",
+a:"Yes, a few times. I've bought flowers for birthdays or other special occasions. I think flowers are a simple way of showing that you care about someone.",
+c:"有过几次。我曾经在生日或者其他特殊场合买花。我觉得花是一种简单的表达关心的方式。",
+v:["special occasions","show","care about","a few times"]
+]
+},
+
+{
+topic:"Puzzles",
+cn:"拼图和益智游戏",
+questions:[
+{
+q:"Do you like doing puzzles?",
+a:"Yes, sometimes. I enjoy puzzles because they require concentration and patience. I usually do them when I want to take a break from studying or using my phone.",
+c:"有时候喜欢。我喜欢拼图，因为它需要注意力和耐心。我通常在想暂时离开学习或者手机的时候玩。",
+v:["puzzle","concentration","patience","take a break"]
+},
+{
+q:"Did you do puzzles when you were a child?",
+a:"Yes. I used to do simple jigsaw puzzles when I was younger. I found it satisfying to finish the whole picture after spending a long time on it.",
+c:"是的。我小时候经常玩简单的拼图。花很长时间完成一整幅图之后，我会觉得很有成就感。",
+v:["jigsaw puzzle","used to","satisfying","finish"]
+},
+{
+q:"Do you think puzzles are good for children?",
+a:"Yes, I think they can be useful. Puzzles can help children develop concentration and problem-solving skills. They can also be a fun alternative to spending too much time on screens.",
+c:"我觉得有好处。拼图可以帮助孩子培养注意力和解决问题的能力，也可以成为过度使用电子屏幕的一种有趣替代方式。",
+v:["develop","problem-solving skills","alternative","screens"]
+]
+},
+
+{
+topic:"Public Transport",
+cn:"公共交通",
+questions:[
+{
+q:"Do you often use public transport?",
+a:"Yes, quite often. I usually use buses or trains because they are convenient and I don't have to worry about parking. They are also useful when the roads are busy.",
+c:"是的，经常。我通常乘坐公交车或者火车，因为它们方便，而且不用担心停车。在道路拥堵的时候，公共交通也很有用。",
+v:["public transport","convenient","parking","roads are busy"]
+},
+{
+q:"What kind of public transport do you prefer?",
+a:"I prefer trains because they are usually faster and more predictable. I can also use the travel time to read or listen to something.",
+c:"我更喜欢火车，因为它通常更快，而且时间比较容易预测。我还可以利用乘车时间阅读或者听一些东西。",
+v:["predictable","travel time","read","listen"]
+},
+{
+q:"What would make public transport better?",
+a:"I think more frequent services would help, especially during busy periods. Clearer information about delays would also make travelling less stressful.",
+c:"我觉得增加班次会有所帮助，尤其是在繁忙时段。如果能更清楚地提供延误信息，出行也会少一些压力。",
+v:["frequent services","busy periods","delays","less stressful"]
+]
+},
+
+{
+topic:"Names",
+cn:"名字",
+questions:[
+{
+q:"Does your name have any special meaning?",
+a:"Yes, my name has a meaning chosen by my family. I think it reflects what my parents hoped for me when I was born. I've always liked having a name with some meaning behind it.",
+c:"有，我的名字有家人选择的特殊含义。我觉得它反映了父母在我出生时对我的一些期望。我一直喜欢这个有一定含义的名字。",
+v:["special meaning","reflect","hope for","behind it"]
+},
+{
+q:"Are there any popular names in your country?",
+a:"Yes, there are always some names that become popular for a period of time. Some parents choose traditional names, while others prefer names that sound modern.",
+c:"有。总会有一些名字在某一段时间变得很流行。有些父母选择传统名字，而另一些更喜欢听起来现代的名字。",
+v:["popular","for a period of time","traditional","modern"]
+},
+{
+q:"Would you like to change your name?",
+a:"Probably not. I've had it for my whole life, so it feels like an important part of my identity. Even if it isn't perfect, I'm quite used to it.",
+c:"应该不会。我一辈子都用这个名字，所以它感觉像是身份中很重要的一部分。即使它不是完美的，我也已经很习惯了。",
+v:["identity","whole life","used to","important part"]
+]
+},
+
+{
+topic:"Geography",
+cn:"地理",
+questions:[
+{
+q:"Do you like geography?",
+a:"Yes, to some extent. I enjoy learning about different countries, landscapes and climates. It helps me understand why places around the world can be so different.",
+c:"在一定程度上喜欢。我喜欢了解不同国家、地形和气候。这能帮助我理解为什么世界各地的地方会有这么大的不同。",
+v:["to some extent","landscape","climate","around the world"]
+},
+{
+q:"Did you study geography at school?",
+a:"Yes, I did. We learned about maps, countries, natural resources and different physical environments. I found some parts interesting, especially when we used maps.",
+c:"学过。我们学习地图、国家、自然资源以及不同的自然环境。我觉得有些内容很有趣，尤其是使用地图的时候。",
+v:["natural resources","physical environment","maps","interesting"]
+},
+{
+q:"Would you like to learn more about other countries?",
+a:"Yes. I think it would be useful to learn more about their geography and culture before travelling there. It could make the travel experience more meaningful.",
+c:"愿意。我觉得去一个国家旅行之前多了解一些当地的地理和文化会很有用，也能让旅行经历更有意义。",
+v:["before travelling","travel experience","meaningful","culture"]
+]
+},
+
+{
+topic:"Birthday",
+cn:"生日",
+questions:[
+{
+q:"Do you usually celebrate your birthday?",
+a:"Yes, but usually in a simple way. I might have a meal with my family or a few close friends. I don't really need a big party to enjoy my birthday.",
+c:"会，不过通常比较简单。我可能和家人或者几个好朋友吃顿饭。我其实不需要大型聚会也能享受生日。",
+v:["celebrate","simple way","close friends","big party"]
+},
+{
+q:"What did you do on your last birthday?",
+a:"I had dinner with a few people close to me. We had some good food and talked for a long time. It wasn't anything special, but I really enjoyed the relaxed atmosphere.",
+c:"我和几个亲近的人一起吃了晚饭。我们吃了些好吃的东西，还聊了很久。虽然没有什么特别的活动，但我很享受那种轻松的氛围。",
+v:["close to me","relaxed atmosphere","anything special","enjoy"]
+},
+{
+q:"Do you think birthdays are important?",
+a:"I think they are meaningful, but people celebrate them in different ways. For me, a birthday is mainly a chance to spend time with people I care about and think about the past year.",
+c:"我觉得生日有意义，但不同的人庆祝方式不同。对我来说，生日主要是一个和重要的人相处，并回顾过去一年的机会。",
+v:["meaningful","in different ways","care about","past year"]
+]
+},{
+topic:"Staying Up Late",
+cn:"熬夜",
+questions:[
+{
+q:"Do you often stay up late?",
+a:"Not very often, but it sometimes happens when I have a lot of work to finish. I try to keep a regular sleep schedule because I feel much better the next day when I get enough sleep.",
+c:"不是特别经常，但有很多事情要完成的时候偶尔会熬夜。我尽量保持规律的睡眠时间，因为睡眠充足的话，第二天状态会好很多。",
+v:["stay up late","finish work","regular sleep schedule","get enough sleep"]
+},
+{
+q:"Did you stay up late when you were a child?",
+a:"Not really. My parents usually asked me to go to bed at a reasonable time. I sometimes wanted to stay up and watch television, but they didn't usually let me.",
+c:"不太会。我父母通常要求我在合理的时间睡觉。有时候我想熬夜看电视，但他们通常不会允许。",
+v:["reasonable time","go to bed","television","allow"]
+},
+{
+q:"What do you usually do when you stay up late?",
+a:"I usually study, finish some work or watch something online. However, I try not to make staying up late a regular habit because it affects my energy the following day.",
+c:"我通常学习、完成一些事情或者在网上看点东西。不过我尽量不让熬夜成为习惯，因为它会影响第二天的精力。",
+v:["regular habit","affect","energy","following day"]
+]
+},
+
+{
+topic:"Jewellery",
+cn:"珠宝首饰",
+questions:[
+{
+q:"Do you like wearing jewellery?",
+a:"I don't wear jewellery very often, but I think some simple pieces look nice. I prefer something small and comfortable rather than anything too noticeable.",
+c:"我不经常戴首饰，但我觉得一些简单的首饰很好看。我更喜欢小巧舒服的，而不是特别显眼的。",
+v:["jewellery","simple pieces","noticeable","comfortable"]
+},
+{
+q:"Have you ever bought jewellery for someone?",
+a:"Yes, I've bought a small piece as a gift before. I chose something fairly simple because I wasn't sure about the person's taste, so I wanted it to be easy to wear.",
+c:"有过。我以前买过一件小首饰作为礼物。我选择了比较简单的款式，因为不确定对方的品味，所以希望它容易搭配。",
+v:["as a gift","fairly simple","taste","easy to wear"]
+},
+{
+q:"What kind of jewellery do people in your country like?",
+a:"It depends on their age and personal style. Some people like traditional jewellery, while younger people often prefer simple and modern designs.",
+c:"这取决于年龄和个人风格。有些人喜欢传统首饰，而年轻人通常更喜欢简单现代的设计。",
+v:["personal style","traditional","modern designs","depend on"]
+]
+},
+
+{
+topic:"Plans",
+cn:"计划",
+questions:[
+{
+q:"Do you make plans every day?",
+a:"I usually have a general plan for the day, especially when I have classes or important things to do. I don't plan every minute, though, because I like to leave some room for unexpected things.",
+c:"我通常会有一个大概的日计划，尤其是有课或者重要事情的时候。不过我不会安排每一分钟，因为我喜欢给意外情况留一些空间。",
+v:["general plan","every minute","leave room","unexpected"]
+},
+{
+q:"Do you make plans for your future?",
+a:"Yes, to some extent. I have some ideas about what I want to study and what kind of work I'd like to do. At the same time, I know things can change, so I try to stay flexible.",
+c:"会，在一定程度上。我对想学什么以及以后想做什么工作有一些想法。同时我知道事情可能会变化，所以我尽量保持灵活。",
+v:["to some extent","future","stay flexible","things can change"]
+},
+{
+q:"Do you prefer making plans or doing things spontaneously?",
+a:"I prefer a mixture of both. I like making plans for important things, but I also enjoy doing something spontaneously from time to time. It makes life feel less predictable.",
+c:"我两种都喜欢。重要的事情我喜欢提前计划，但偶尔也喜欢临时做一些事情。这样会让生活没那么一成不变。",
+v:["a mixture of","spontaneously","from time to time","predictable"]
+]
+},
+
+{
+topic:"Texting Messages",
+cn:"发短信",
+questions:[
+{
+q:"Do you often send text messages?",
+a:"Yes, quite often. Messaging is probably the easiest way for me to communicate with friends and classmates. I can send a quick message without interrupting what they're doing.",
+c:"是的，经常。发消息可能是我和朋友、同学交流最简单的方式。我可以快速发一条消息，而不会打扰他们正在做的事情。",
+v:["text message","communicate","interrupt","quick message"]
+},
+{
+q:"What do you usually text your friends about?",
+a:"Mostly everyday things, such as meeting times, food or weekend plans. We also send each other links and funny pictures when we find something interesting.",
+c:"主要是日常的事情，比如见面时间、食物或者周末计划。如果看到有趣的东西，我们也会互相发链接和搞笑图片。",
+v:["everyday things","meeting time","links","funny pictures"]
+},
+{
+q:"Do you prefer texting or calling?",
+a:"For simple things, I prefer texting because it's convenient and I can reply when I have time. For an important or complicated matter, though, I think calling is more efficient.",
+c:"简单的事情我更喜欢发消息，因为方便，而且有时间的时候再回复就可以。不过对于重要或者复杂的事情，我觉得打电话更有效率。",
+v:["convenient","reply","complicated","efficient"]
+]
+},
+
+{
+topic:"Snacks",
+cn:"零食",
+questions:[
+{
+q:"Do you often eat snacks?",
+a:"Yes, sometimes, especially when I'm studying for a long time. I usually have something simple like fruit, biscuits or nuts. I try not to eat too much because I still want to have a proper meal.",
+c:"会，有时候，尤其是长时间学习的时候。我通常吃一些简单的东西，比如水果、饼干或者坚果。我尽量不吃太多，因为还是要正常吃饭。",
+v:["snacks","biscuits","nuts","proper meal"]
+},
+{
+q:"What kind of snacks do you like?",
+a:"I prefer snacks that aren't too sweet. Fruit and nuts are probably my first choices because they are easy to carry and don't make me feel too full.",
+c:"我更喜欢不是特别甜的零食。水果和坚果可能是我的首选，因为它们容易携带，也不会让我觉得太撑。",
+v:["not too sweet","first choice","easy to carry","full"]
+},
+{
+q:"Did you eat snacks when you were a child?",
+a:"Yes, quite a lot. I especially liked biscuits and chocolate. My parents sometimes limited how much I could eat because they didn't want me to have too much sugar.",
+c:"吃，而且挺多的。我尤其喜欢饼干和巧克力。父母有时候会限制我吃多少，因为他们不希望我摄入太多糖。",
+v:["especially","limit","sugar","how much"]
+]
+},
+
+{
+topic:"Patience",
+cn:"耐心",
+questions:[
+{
+q:"Are you a patient person?",
+a:"I think I'm fairly patient in most situations. However, I can become impatient when something is very slow and I have been waiting for a long time.",
+c:"我觉得在大多数情况下我还算有耐心。不过，如果事情非常慢，而且我已经等了很久，我也会变得没有耐心。",
+v:["patient","fairly","impatient","wait"]
+},
+{
+q:"When do you need to be patient?",
+a:"I need patience when I'm learning something difficult. If I don't understand something immediately, I have to keep trying instead of giving up.",
+c:"学习困难的东西时需要耐心。如果我不能马上理解，我就必须继续尝试，而不是放弃。",
+v:["patience","difficult","immediately","give up"]
+},
+{
+q:"Do you think people are more impatient nowadays?",
+a:"In some ways, yes. Technology has made many things faster, so people may expect immediate results. For example, we can get information in seconds, which can make waiting feel harder.",
+c:"某种程度上是的。科技让很多事情变快了，所以人们可能期待立即得到结果。例如，我们几秒钟就能获得信息，这会让等待变得更加困难。",
+v:["nowadays","immediate results","in seconds","expect"]
+]
+},
+
+{
+topic:"Machines",
+cn:"机器",
+questions:[
+{
+q:"What machines do you use every day?",
+a:"I use my phone and computer every day. I also use household machines such as a washing machine and a microwave. They save me quite a lot of time.",
+c:"我每天都会使用手机和电脑。我也会使用洗衣机和微波炉之类的家用机器。它们为我节省了不少时间。",
+v:["household machines","washing machine","microwave","save time"]
+},
+{
+q:"Do you think machines make life easier?",
+a:"Yes, definitely. Machines can deal with repetitive tasks and help us save time. This gives people more time to study, work or simply relax.",
+c:"当然。机器可以处理重复性的工作，帮助我们节省时间。这样人们就有更多时间学习、工作或者简单地放松。",
+v:["repetitive tasks","deal with","save time","relax"]
+},
+{
+q:"Is there a machine you would like to have?",
+a:"I'd like to have a smart kitchen machine that could help with simple cooking tasks. It would be useful when I'm busy and don't have much time to prepare food.",
+c:"我想要一台可以帮助完成简单烹饪工作的智能厨房机器。忙的时候它会很有用，因为我没有太多时间准备食物。",
+v:["smart","kitchen machine","cooking tasks","prepare food"]
+]
+},
+
+{
+topic:"Memory",
+cn:"记忆",
+questions:[
+{
+q:"Are you good at remembering things?",
+a:"I'm reasonably good at remembering important information, but I sometimes forget small things. That's why I often use notes or reminders on my phone.",
+c:"我记重要信息的能力还不错，但有时候会忘记一些小事情。所以我经常使用手机上的备忘录或者提醒功能。",
+v:["remember","reasonably","small things","reminder"]
+},
+{
+q:"What do you need to remember every day?",
+a:"I need to remember my schedule, deadlines and things I need to buy. If I have several tasks, I usually write them down so I don't forget anything.",
+c:"我每天需要记住日程、截止日期和需要购买的东西。如果有好几个任务，我通常会把它们写下来，这样就不会忘记。",
+v:["schedule","deadline","write down","task"]
+},
+{
+q:"Do you think technology affects people's memory?",
+a:"Yes, probably. Since we can store so much information on our phones, we don't need to remember every small detail. It's convenient, although it may make us rely on technology more.",
+c:"我觉得可能会。因为我们可以在手机上保存很多信息，所以不需要记住每一个小细节。这很方便，不过也可能让我们更加依赖科技。",
+v:["store information","detail","rely on","technology"]
+]
+},
+
+{
+topic:"Weather",
+cn:"天气",
+questions:[
+{
+q:"What kind of weather do you like?",
+a:"I like mild and sunny weather. It's comfortable enough to spend time outside, but it isn't too hot. I especially enjoy walking when the weather is like that.",
+c:"我喜欢温和而晴朗的天气。这样的天气适合外出，而且不会太热。我尤其喜欢在这种天气里散步。",
+v:["mild","sunny","comfortable","spend time outside"]
+},
+{
+q:"Does the weather affect your mood?",
+a:"Yes, to some extent. On a sunny day, I usually feel more energetic and motivated. When it's dark and rainy for several days, I prefer staying indoors.",
+c:"会，在一定程度上。晴天的时候我通常更有活力，也更有动力。如果连续几天下雨又阴沉，我更喜欢待在室内。",
+v:["affect my mood","energetic","motivated","indoors"]
+},
+{
+q:"Do you check the weather forecast?",
+a:"Yes, especially when I'm planning to travel or spend a lot of time outside. I usually check it on my phone because it's quick and convenient.",
+c:"会，尤其是在计划旅行或者要长时间待在户外的时候。我通常在手机上查看，因为又快又方便。",
+v:["weather forecast","plan to travel","outdoors","quick"]
+]
+},
+
+{
+topic:"Writing",
+cn:"写作",
+questions:[
+{
+q:"Do you like writing?",
+a:"Yes, when I have something interesting to write about. I enjoy writing down my ideas because it helps me organise my thoughts and remember important information.",
+c:"如果有有趣的内容可以写，我会喜欢。我喜欢把自己的想法写下来，因为这能帮助我整理思路并记住重要信息。",
+v:["write down","organise thoughts","ideas","important information"]
+},
+{
+q:"What do you usually write?",
+a:"I usually write study notes, messages and short lists. Sometimes I also write down ideas for things I want to do in the future.",
+c:"我通常写学习笔记、消息和一些简短的清单。有时候也会写下以后想做的事情。",
+v:["study notes","short lists","write down","in the future"]
+},
+{
+q:"Did you enjoy writing when you were a child?",
+a:"Not particularly. I found long writing tasks a little boring when I was young. However, I enjoyed writing short stories when I had a topic I really liked.",
+c:"不是特别喜欢。我小时候觉得长篇写作任务有点无聊。不过，如果遇到自己真正喜欢的话题，我会喜欢写短故事。",
+v:["not particularly","writing task","boring","short story"]
+]
+},
+
+{
+topic:"Being Alone",
+cn:"独处",
+questions:[
+{
+q:"Do you like spending time alone?",
+a:"Yes, sometimes. I need some quiet time when I've had a busy day. I might listen to music, read or simply do nothing for a while.",
+c:"有时候喜欢。如果一天比较忙，我需要一些安静的时间。我可能听音乐、阅读，或者什么都不做一会儿。",
+v:["spend time alone","quiet time","busy day","for a while"]
+},
+{
+q:"What do you usually do when you are alone?",
+a:"I usually do something relaxing, such as watching a video, reading or taking a walk. Being alone gives me a chance to think without being interrupted.",
+c:"我通常做一些放松的事情，比如看视频、阅读或者散步。独处让我有机会思考，而不会被别人打扰。",
+v:["relaxing","take a walk","interrupted","a chance to"]
+},
+{
+q:"Do you feel lonely when you are alone?",
+a:"Not usually. I think being alone and feeling lonely are different things. I can enjoy my own company, but I also like meeting people when I have enough energy.",
+c:"通常不会。我觉得独处和感到孤独是两回事。我可以享受一个人的时间，但精力充足的时候也喜欢和别人见面。",
+v:["lonely","different things","own company","enough energy"]
+]
+},
+
+{
+topic:"Social Media",
+cn:"社交媒体",
+questions:[
+{
+q:"Do you often use social media?",
+a:"Yes, almost every day. I mainly use it to keep in touch with friends and look at interesting content. I try to control how much time I spend on it.",
+c:"是的，几乎每天都会用。我主要用它和朋友保持联系，以及浏览有趣的内容。我会尽量控制使用时间。",
+v:["social media","keep in touch","content","control"]
+},
+{
+q:"What do you usually do on social media?",
+a:"I usually watch short videos, read posts and send messages to friends. Sometimes I also use it to find information about restaurants, travel or products.",
+c:"我通常看短视频、读帖子以及给朋友发消息。有时候也会用它寻找餐馆、旅行或者产品方面的信息。",
+v:["short videos","posts","find information","products"]
+},
+{
+q:"Do you think social media is useful?",
+a:"Yes, if people use it wisely. It makes communication easier and gives us quick access to information. The main problem is that it can be easy to spend too much time on it.",
+c:"我觉得有用，只要合理使用。它让交流变得更加方便，也让我们可以快速获取信息。主要的问题是人们很容易在上面花太多时间。",
+v:["wisely","communication","access to information","spend too much time"]
+]
+},
+
+{
+topic:"Making a List",
+cn:"列清单",
+questions:[
+{
+q:"Do you make lists?",
+a:"Yes, quite often. I make lists of things I need to do or buy. Writing them down helps me remember everything and makes my day feel more organised.",
+c:"是的，经常。我会列需要做的事情或者需要购买的东西。写下来可以帮助我记住所有事情，也让一天显得更有条理。",
+v:["make a list","things to do","write down","organised"]
+},
+{
+q:"What kind of lists do you make?",
+a:"I mainly make to-do lists and shopping lists. Before an important task, I sometimes make a short list of the steps I need to follow.",
+c:"我主要列待办事项清单和购物清单。在完成重要任务之前，我有时也会列出需要遵循的步骤。",
+v:["to-do list","shopping list","steps","follow"]
+},
+{
+q:"Do you prefer writing lists on paper or on your phone?",
+a:"I usually use my phone because it's always with me. However, for studying, I sometimes prefer paper because writing things by hand helps me remember them.",
+c:"我通常使用手机，因为手机一直在身边。不过学习的时候我有时更喜欢纸，因为手写能帮助我记忆。",
+v:["on paper","by hand","remember","always with me"]
+]
+},
+
+{
+topic:"Housekeeping and Cooking",
+cn:"家务和做饭",
+questions:[
+{
+q:"Do you often do housework?",
+a:"Yes, I do some basic housework regularly. I usually clean my room, wash clothes and tidy up my things. I prefer doing a little at a time rather than cleaning everything at once.",
+c:"是的，我会定期做一些基本家务。我通常打扫房间、洗衣服和整理东西。我更喜欢一次做一点，而不是一次把所有事情都做完。",
+v:["housework","regularly","tidy up","at once"]
+},
+{
+q:"Do you enjoy cooking?",
+a:"I enjoy simple cooking. I don't usually make complicated dishes, but I like preparing quick meals when I have enough time. It's also cheaper than eating out all the time.",
+c:"我喜欢简单的烹饪。我通常不会做复杂的菜，但有时间的时候喜欢准备一些快捷的饭菜。一直在外面吃也比较贵。",
+v:["simple cooking","complicated dishes","prepare meals","eating out"]
+},
+{
+q:"Who usually does the cooking in your home?",
+a:"It depends on the day. We usually share the work, so the person who has more free time does the cooking. I think sharing housework makes things easier for everyone.",
+c:"要看具体哪一天。我们通常会分担家务，所以空闲时间更多的人负责做饭。我觉得分担家务会让每个人都轻松一些。",
+v:["share the work","free time","housework","make things easier"]
+]
+},
+
+{
+topic:"Saying Thank You",
+cn:"说谢谢",
+questions:[
+{
+q:"Do you often say thank you?",
+a:"Yes, I do. I think saying thank you is a simple way to show respect and appreciation. Even for small things, I usually say it automatically.",
+c:"是的。我觉得说谢谢是一种简单的表达尊重和感谢的方式。即使是很小的事情，我通常也会自然地说谢谢。",
+v:["show respect","appreciation","automatically","small things"]
+},
+{
+q:"When was the last time someone thanked you?",
+a:"Probably recently when I helped someone with a small task. They thanked me afterwards, and I felt good because it showed that they appreciated my help.",
+c:"应该就是最近，我帮助别人完成了一件小事情。之后对方向我道谢，我感觉很好，因为这说明他们认可我的帮助。",
+v:["help someone","task","afterwards","appreciate"]
+},
+{
+q:"Why is it important to say thank you?",
+a:"I think it makes social interactions more positive. A simple thank-you can show that you don't take someone's effort for granted, and it can make people feel respected.",
+c:"我觉得这能让人与人之间的交流更加积极。简单的一句谢谢可以表明你没有把别人的付出视为理所当然，也能让别人感受到尊重。",
+v:["social interactions","take for granted","effort","respected"]
+]
+},{
+topic:"Being Alone",
+cn:"独处",
+questions:[
+{
+q:"Do you like spending time alone?",
+a:"Yes, sometimes. I need some quiet time when I've had a busy day. I might listen to music, read or simply do nothing for a while.",
+c:"有时候喜欢。如果一天比较忙，我需要一些安静的时间。我可能听音乐、阅读，或者什么都不做一会儿。",
+v:["spend time alone","quiet time","busy day","for a while"]
+},
+{
+q:"What do you usually do when you are alone?",
+a:"I usually do something relaxing, such as watching a video, reading or taking a walk. Being alone gives me a chance to think without being interrupted.",
+c:"我通常做一些放松的事情，比如看视频、阅读或者散步。独处让我有机会思考，而不会被别人打扰。",
+v:["relaxing","take a walk","interrupted","a chance to"]
+},
+{
+q:"Do you feel lonely when you are alone?",
+a:"Not usually. I think being alone and feeling lonely are different things. I can enjoy my own company, but I also like meeting people when I have enough energy.",
+c:"通常不会。我觉得独处和感到孤独是两回事。我可以享受一个人的时间，但精力充足的时候也喜欢和别人见面。",
+v:["lonely","different things","own company","enough energy"]
+]
+},
+
+{
+topic:"Social Media",
+cn:"社交媒体",
+questions:[
+{
+q:"Do you often use social media?",
+a:"Yes, almost every day. I mainly use it to keep in touch with friends and look at interesting content. I try to control how much time I spend on it.",
+c:"是的，几乎每天都会用。我主要用它和朋友保持联系，以及浏览有趣的内容。我会尽量控制使用时间。",
+v:["social media","keep in touch","content","control"]
+},
+{
+q:"What do you usually do on social media?",
+a:"I usually watch short videos, read posts and send messages to friends. Sometimes I also use it to find information about restaurants, travel or products.",
+c:"我通常看短视频、读帖子以及给朋友发消息。有时候也会用它寻找餐馆、旅行或者产品方面的信息。",
+v:["short videos","posts","find information","products"]
+},
+{
+q:"Do you think social media is useful?",
+a:"Yes, if people use it wisely. It makes communication easier and gives us quick access to information. The main problem is that it can be easy to spend too much time on it.",
+c:"我觉得有用，只要合理使用。它让交流变得更加方便，也让我们可以快速获取信息。主要的问题是人们很容易在上面花太多时间。",
+v:["wisely","communication","access to information","spend too much time"]
+]
+},
+
+{
+topic:"Making a List",
+cn:"列清单",
+questions:[
+{
+q:"Do you make lists?",
+a:"Yes, quite often. I make lists of things I need to do or buy. Writing them down helps me remember everything and makes my day feel more organised.",
+c:"是的，经常。我会列需要做的事情或者需要购买的东西。写下来可以帮助我记住所有事情，也让一天显得更有条理。",
+v:["make a list","things to do","write down","organised"]
+},
+{
+q:"What kind of lists do you make?",
+a:"I mainly make to-do lists and shopping lists. Before an important task, I sometimes make a short list of the steps I need to follow.",
+c:"我主要列待办事项清单和购物清单。在完成重要任务之前，我有时也会列出需要遵循的步骤。",
+v:["to-do list","shopping list","steps","follow"]
+},
+{
+q:"Do you prefer writing lists on paper or on your phone?",
+a:"I usually use my phone because it's always with me. However, for studying, I sometimes prefer paper because writing things by hand helps me remember them.",
+c:"我通常使用手机，因为手机一直在身边。不过学习的时候我有时更喜欢纸，因为手写能帮助我记忆。",
+v:["on paper","by hand","remember","always with me"]
+]
+},
+
+{
+topic:"Housekeeping and Cooking",
+cn:"家务和做饭",
+questions:[
+{
+q:"Do you often do housework?",
+a:"Yes, I do some basic housework regularly. I usually clean my room, wash clothes and tidy up my things. I prefer doing a little at a time rather than cleaning everything at once.",
+c:"是的，我会定期做一些基本家务。我通常打扫房间、洗衣服和整理东西。我更喜欢一次做一点，而不是一次把所有事情都做完。",
+v:["housework","regularly","tidy up","at once"]
+},
+{
+q:"Do you enjoy cooking?",
+a:"I enjoy simple cooking. I don't usually make complicated dishes, but I like preparing quick meals when I have enough time. It's also cheaper than eating out all the time.",
+c:"我喜欢简单的烹饪。我通常不会做复杂的菜，但有时间的时候喜欢准备一些快捷的饭菜。一直在外面吃也比较贵。",
+v:["simple cooking","complicated dishes","prepare meals","eating out"]
+},
+{
+q:"Who usually does the cooking in your home?",
+a:"It depends on the day. We usually share the work, so the person who has more free time does the cooking. I think sharing housework makes things easier for everyone.",
+c:"要看具体哪一天。我们通常会分担家务，所以空闲时间更多的人负责做饭。我觉得分担家务会让每个人都轻松一些。",
+v:["share the work","free time","housework","make things easier"]
+]
+},
+
+{
+topic:"Saying Thank You",
+cn:"说谢谢",
+questions:[
+{
+q:"Do you often say thank you?",
+a:"Yes, I do. I think saying thank you is a simple way to show respect and appreciation. Even for small things, I usually say it automatically.",
+c:"是的。我觉得说谢谢是一种简单的表达尊重和感谢的方式。即使是很小的事情，我通常也会自然地说谢谢。",
+v:["show respect","appreciation","automatically","small things"]
+},
+{
+q:"When was the last time someone thanked you?",
+a:"Probably recently when I helped someone with a small task. They thanked me afterwards, and I felt good because it showed that they appreciated my help.",
+c:"应该就是最近，我帮助别人完成了一件小事情。之后对方向我道谢，我感觉很好，因为这说明他们认可我的帮助。",
+v:["help someone","task","afterwards","appreciate"]
+},
+{
+q:"Why is it important to say thank you?",
+a:"I think it makes social interactions more positive. A simple thank-you can show that you don't take someone's effort for granted, and it can make people feel respected.",
+c:"我觉得这能让人与人之间的交流更加积极。简单的一句谢谢可以表明你没有把别人的付出视为理所当然，也能让别人感受到尊重。",
+v:["social interactions","take for granted","effort","respected"]
+]
+},
+
+{
+topic:"Chocolate",
+cn:"巧克力",
+questions:[
+{
+q:"Do you like chocolate?",
+a:"Yes, I do, especially dark chocolate. I like the taste, but I try not to eat too much because it can be quite sweet and high in calories.",
+c:"喜欢，尤其是黑巧克力。我喜欢它的味道，但我尽量不会吃太多，因为它可能比较甜，而且热量比较高。",
+v:["dark chocolate","taste","sweet","calories"]
+},
+{
+q:"Did you like chocolate when you were a child?",
+a:"Yes, I loved it when I was a child. I especially liked chocolate bars and chocolate biscuits. My parents didn't let me eat too much, though.",
+c:"喜欢。我小时候非常喜欢巧克力，尤其喜欢巧克力棒和巧克力饼干。不过父母不让我吃太多。",
+v:["chocolate bar","biscuits","especially","let someone"]
+},
+{
+q:"Do you often give chocolate as a gift?",
+a:"Sometimes. Chocolate is quite an easy gift because many people like it and you don't need to know their exact size or preferences. It's especially suitable for small occasions.",
+c:"有时候会。巧克力是一种比较容易选择的礼物，因为很多人喜欢，而且不需要知道对方具体的尺寸或者偏好。它特别适合一些小型场合。",
+v:["as a gift","preferences","suitable","occasion"]
+]
+},
+
+{
+topic:"Singing",
+cn:"唱歌",
+questions:[
+{
+q:"Do you like singing?",
+a:"Yes, although I'm not a very good singer. I enjoy singing when I'm alone because I don't have to worry about whether I sound perfect.",
+c:"喜欢，虽然我唱歌不是特别好。我喜欢一个人的时候唱歌，因为不用担心自己唱得是不是完美。",
+v:["singer","sound","perfect","worry about"]
+},
+{
+q:"When do you usually sing?",
+a:"I sometimes sing when I'm listening to music at home. I also sing along with songs when I'm travelling alone, especially if I'm in a good mood.",
+c:"我有时候在家听音乐的时候唱歌。一个人旅行的时候也会跟着歌曲一起唱，尤其是在心情好的时候。",
+v:["listen to music","sing along","travelling alone","in a good mood"]
+},
+{
+q:"Would you like to learn how to sing better?",
+a:"Yes, definitely. I think it would be fun to improve my singing skills. I don't need to become a professional singer, but I'd like to sing more confidently.",
+c:"当然。我觉得提高唱歌技巧会很有趣。我不需要成为专业歌手，但希望自己唱歌的时候更自信。",
+v:["singing skills","professional","confidently","improve"]
+]
+},
+
+{
+topic:"Outer Space and Stars",
+cn:"外太空和星星",
+questions:[
+{
+q:"Do you like looking at the stars?",
+a:"Yes, I do. I find the night sky quite peaceful. When I have the chance to see a clear sky away from city lights, I enjoy spending a few minutes looking at the stars.",
+c:"喜欢。我觉得夜空非常宁静。当有机会在远离城市灯光的地方看到晴朗的天空时，我喜欢花几分钟看看星星。",
+v:["night sky","peaceful","clear sky","city lights"]
+},
+{
+q:"Did you learn about space at school?",
+a:"Yes, we learned some basic information about the solar system and planets. I found it interesting because space seemed very distant and mysterious when I was young.",
+c:"学过。我们学习过一些关于太阳系和行星的基础知识。我觉得很有趣，因为小时候觉得太空非常遥远而且神秘。",
+v:["solar system","planet","distant","mysterious"]
+},
+{
+q:"Would you like to travel into space?",
+a:"It sounds exciting, but I'm not sure I'd actually do it. Space travel would be an amazing experience, but I imagine it would also be expensive and quite risky.",
+c:"听起来很令人兴奋，但我不确定自己真的会去。太空旅行会是非常神奇的经历，但我想它也会很昂贵，而且存在一定风险。",
+v:["space travel","amazing experience","expensive","risky"]
+]
+},
+
+{
+topic:"Small Business",
+cn:"小型企业",
+questions:[
+{
+q:"Would you like to run a small business?",
+a:"Possibly. I like the idea of having control over my work and making my own decisions. However, running a business also requires a lot of time and responsibility.",
+c:"有可能。我喜欢自己掌控工作并做决定的感觉。不过，经营一家企业也需要投入很多时间和承担很多责任。",
+v:["run a business","have control over","make decisions","responsibility"]
+},
+{
+q:"What kind of small business would you like to have?",
+a:"I'd probably choose something related to food, education or technology. I'd want it to be relatively small so I could maintain good relationships with customers.",
+c:"我可能会选择与食物、教育或者科技有关的生意。我希望规模相对小一些，这样可以和顾客保持良好的关系。",
+v:["related to","relatively","customers","maintain relationships"]
+},
+{
+q:"Are small businesses important in your area?",
+a:"Yes, I think so. Local shops and restaurants provide useful services and also make the neighbourhood more lively. They can also create jobs for local people.",
+c:"我觉得是的。本地商店和餐馆提供有用的服务，也能让社区更加有活力。它们还可以为当地人创造就业机会。",
+v:["local shops","provide services","lively","create jobs"]
+]
+},
+
+{
+topic:"Being Busy",
+cn:"忙碌",
+questions:[
+{
+q:"Are you usually busy?",
+a:"Yes, I can be quite busy, especially during study periods. I usually have classes, assignments and other things to deal with. I try to organise my time so I don't feel too stressed.",
+c:"是的，我有时候挺忙的，尤其是在学习任务比较多的时候。我通常有课程、作业以及其他事情要处理。我会尽量安排好时间，这样不会压力太大。",
+v:["study period","assignment","deal with","organise time"]
+},
+{
+q:"Why are you usually busy?",
+a:"Most of the time, it's because I have several things that need to be done at the same time. I sometimes underestimate how long a task will take, so my schedule becomes quite full.",
+c:"大多数时候是因为有好几件事情需要同时完成。有时候我会低估一件事情需要花费的时间，所以日程会变得很满。",
+v:["at the same time","underestimate","schedule","full"]
+},
+{
+q:"Do you like being busy?",
+a:"I like being productive, but I don't want to be busy all the time. When I have too many things to do, I can feel tired. I think having some free time is also important.",
+c:"我喜欢有事情做并且有效率，但不希望一直很忙。当事情太多的时候，我会觉得累。我觉得拥有一些空闲时间也很重要。",
+v:["productive","all the time","feel tired","free time"]
+]
+},
+
+{
+topic:"Internet",
+cn:"互联网",
+questions:[
+{
+q:"How often do you use the internet?",
+a:"I use it every day for studying, communication and entertainment. It's such a normal part of my routine that I don't really notice how often I use it.",
+c:"我每天都会使用互联网学习、交流和娱乐。它已经成为我日常生活中很正常的一部分，所以我甚至不会特别注意自己使用了多久。",
+v:["every day","entertainment","routine","notice"]
+},
+{
+q:"What do you usually use the internet for?",
+a:"I mainly use it to search for information, study, watch videos and communicate with other people. I also use online services for shopping and booking things.",
+c:"我主要用互联网搜索信息、学习、看视频以及和别人交流。我也会使用在线服务购物和预订东西。",
+v:["search for information","online services","booking","communicate"]
+},
+{
+q:"Could you live without the internet?",
+a:"It would be very difficult. I could probably manage for a short period, but studying, communication and many everyday tasks would become much less convenient.",
+c:"会非常困难。我可能可以短时间适应，但学习、交流以及很多日常事情都会变得非常不方便。",
+v:["live without","manage","short period","less convenient"]
+]
+},
+
+{
+topic:"Praising",
+cn:"表扬",
+questions:[
+{
+q:"Do you often praise your friends?",
+a:"Yes, when I genuinely think they've done something well. I think a sincere compliment can make people feel more confident and appreciated.",
+c:"会，如果我真的觉得朋友做得很好。我觉得真诚的表扬可以让别人更自信，也能让他们感受到认可。",
+v:["praise","genuinely","sincere compliment","appreciated"]
+},
+{
+q:"When was the last time someone praised you?",
+a:"Recently, someone complimented me on something I had worked hard on. It made me feel quite happy because I knew the effort I had put in was noticed.",
+c:"最近有人表扬了我努力完成的一件事情。这让我感觉很好，因为我知道自己付出的努力被别人看到了。",
+v:["compliment","work hard","effort","be noticed"]
+},
+{
+q:"Do you think children need to be praised?",
+a:"Yes, but I think praise should be specific and sincere. Instead of praising children for everything, adults can point out exactly what they did well and encourage them to keep improving.",
+c:"我觉得需要，但表扬应该具体而真诚。与其什么事情都表扬孩子，成年人可以指出他们具体做得好的地方，并鼓励他们继续进步。",
+v:["specific","sincere","point out","encourage"]
+]
+}
+
+];
+  /* =========================
+   APP LOGIC
+========================= */
+
+let allQuestions = [];
+let currentTopicIndex = -1;
+let currentPractice = null;
+
+const DONE_KEY = "ielts65_done";
+const FAV_KEY = "ielts65_favorites";
+
+function loadSet(key){
+  try{
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function saveSet(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function questionId(topicIndex, questionIndex){
+  return `${topicIndex}-${questionIndex}`;
+}
+
+function getDone(){
+  return loadSet(DONE_KEY);
+}
+
+function getFav(){
+  return loadSet(FAV_KEY);
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function showPage(pageId, navButton){
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  const page = document.getElementById(pageId);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  document.querySelectorAll("nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  if(navButton){
+    navButton.classList.add("active");
+  }else{
+    const map = {
+      home:0,
+      part1:1,
+      practice:2,
+      favorites:3
+    };
+
+    const buttons = document.querySelectorAll("nav button");
+
+    if(buttons[map[pageId]]){
+      buttons[map[pageId]].classList.add("active");
+    }
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  if(pageId === "favorites"){
+    renderFavorites();
+  }
+
+  if(pageId === "practice" && !currentPractice){
+    newPracticeQuestion();
+  }
+}
+
+function renderTopics(){
+  const grid = document.getElementById("topicGrid");
+  const input = document.getElementById("topicSearch");
+
+  if(!grid) return;
+
+  const keyword = (input?.value || "")
+    .trim()
+    .toLowerCase();
+
+  grid.innerHTML = "";
+
+  data.forEach((item,index)=>{
+
+    const text =
+      `${item.topic} ${item.cn}`.toLowerCase();
+
+    if(keyword && !text.includes(keyword)){
+      return;
+    }
+
+    const button = document.createElement("button");
+
+    button.className = "topic-btn";
+    button.type = "button";
+
+    button.innerHTML = `
+      <span class="topic-number">
+        TOPIC ${index+1}
+      </span>
+
+      <span class="topic-name">
+        ${escapeHtml(item.topic)}
+      </span>
+
+      <span class="topic-count">
+        ${escapeHtml(item.cn)} ·
+        ${item.questions.length} 道题
+      </span>
+    `;
+
+    button.addEventListener("click",()=>{
+      openTopic(index);
+    });
+
+    grid.appendChild(button);
+  });
+
+  if(!grid.children.length){
+    grid.innerHTML = `
+      <div class="empty"
+           style="grid-column:1/-1">
+        没有找到相关话题。
+      </div>
+    `;
+  }
+}
+
+function openTopic(index){
+
+  currentTopicIndex = index;
+
+  const item = data[index];
+
+  if(!item) return;
+
+  const title =
+    document.getElementById("topicTitle");
+
+  const description =
+    document.getElementById("topicDescription");
+
+  if(title){
+    title.textContent =
+      `${index+1}. ${item.topic} · ${item.cn}`;
+  }
+
+  if(description){
+    description.textContent =
+      `共 ${item.questions.length} 道原创练习。建议先自己回答，再参考答案和词汇。`;
+  }
+
+  renderQuestions(index);
+
+  showPage("part1");
+}
+
+function renderQuestions(topicIndex){
+
+  const container =
+    document.getElementById("questionsContainer");
+
+  const item = data[topicIndex];
+
+  if(!container || !item) return;
+
+  const done = getDone();
+  const fav = getFav();
+
+  container.innerHTML =
+    item.questions.map((q,i)=>{
+
+      const id =
+        questionId(topicIndex,i);
+
+      const isDone =
+        done.includes(id);
+
+      const isFav =
+        fav.includes(id);
+
+      const vocab =
+        (q.v || [])
+        .map(v =>
+          `<span class="tag">
+            ${escapeHtml(v)}
+           </span>`
+        )
+        .join("");
+
+      return `
+        <article
+          class="question-card ${isDone ? "completed" : ""}"
+          id="question-${id}">
+
+          <div class="question-number">
+            Question ${i+1}
+          </div>
+
+          <div class="question-title">
+            ${escapeHtml(q.q)}
+          </div>
+
+          <div class="answer">
+
+            <div class="answer-label">
+              ⭐ Band 6.5 参考答案
+            </div>
+
+            <div>
+              ${escapeHtml(q.a)}
+            </div>
+
+          </div>
+
+          <div class="translation">
+
+            <div class="translation-label">
+              🇨🇳 中文理解
+            </div>
+
+            <div>
+              ${escapeHtml(q.c)}
+            </div>
+
+          </div>
+
+          <div class="vocab">
+            ${vocab}
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="btn btn-blue"
+              type="button"
+              onclick="speakAnswer(${topicIndex},${i})">
+
+              🔊 播放答案
+
+            </button>
+
+            <button
+              class="btn ${isDone ? "btn-gray" : "btn-green"}"
+              type="button"
+              onclick="toggleDone(${topicIndex},${i})">
+
+              ${isDone ? "✓ 已完成" : "✓ 完成"}
+
+            </button>
+
+            <button
+              class="btn ${isFav ? "btn-yellow" : "btn-gray"}"
+              type="button"
+              onclick="toggleFavorite(${topicIndex},${i})">
+
+              ${isFav ? "❤️ 已收藏" : "🤍 收藏"}
+
+            </button>
+
+            <button
+              class="btn btn-red"
+              type="button"
+              onclick="stopSpeech()">
+
+              ⏹ 停止
+
+            </button>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+}
+
+function toggleDone(topicIndex,questionIndex){
+
+  const id =
+    questionId(topicIndex,questionIndex);
+
+  const done = getDone();
+
+  const pos =
+    done.indexOf(id);
+
+  if(pos >= 0){
+    done.splice(pos,1);
+  }else{
+    done.push(id);
+  }
+
+  saveSet(DONE_KEY,done);
+
+  updateStats();
+
+  if(currentTopicIndex >= 0){
+    renderQuestions(currentTopicIndex);
+  }
+
+  renderFavorites();
+}
+
+function toggleFavorite(topicIndex,questionIndex){
+
+  const id =
+    questionId(topicIndex,questionIndex);
+
+  const fav = getFav();
+
+  const pos =
+    fav.indexOf(id);
+
+  if(pos >= 0){
+    fav.splice(pos,1);
+  }else{
+    fav.push(id);
+  }
+
+  saveSet(FAV_KEY,fav);
+
+  updateStats();
+
+  if(currentTopicIndex >= 0){
+    renderQuestions(currentTopicIndex);
+  }
+
+  renderFavorites();
+}
+
+function updateStats(){
+
+  const total =
+    allQuestions.length;
+
+  const done =
+    getDone().length;
+
+  const fav =
+    getFav().length;
+
+  const totalEl =
+    document.getElementById("totalCount");
+
+  const doneEl =
+    document.getElementById("doneCount");
+
+  const favEl =
+    document.getElementById("favCount");
+
+  const progress =
+    document.getElementById("mainProgress");
+
+  if(totalEl){
+    totalEl.textContent = total;
+  }
+
+  if(doneEl){
+    doneEl.textContent = done;
+  }
+
+  if(favEl){
+    favEl.textContent = fav;
+  }
+
+  if(progress){
+
+    progress.style.width =
+      total
+      ? `${Math.min(100,done/total*100)}%`
+      : "0%";
+
+  }
+}
+
+function renderFavorites(){
+
+  const container =
+    document.getElementById("favoriteContainer");
+
+  if(!container) return;
+
+  const fav =
+    getFav();
+
+  if(!fav.length){
+
+    container.innerHTML = `
+      <div class="empty">
+
+        还没有收藏题目。
+
+        <br>
+
+        去 Part 1 点击“🤍 收藏”即可。
+
+      </div>
+    `;
+
+    return;
+  }
+
+  const cards = [];
+
+  fav.forEach(id=>{
+
+    const [ti,qi] =
+      id.split("-").map(Number);
+
+    const item =
+      data[ti];
+
+    const q =
+      item?.questions?.[qi];
+
+    if(!item || !q) return;
+
+    cards.push(`
+
+      <article class="question-card">
+
+        <div class="question-number">
+
+          ${escapeHtml(item.topic)}
+          · Question ${qi+1}
+
+        </div>
+
+        <div class="question-title">
+
+          ${escapeHtml(q.q)}
+
+        </div>
+
+        <div class="answer">
+
+          <div class="answer-label">
+            ⭐ Band 6.5 参考答案
+          </div>
+
+          <div>
+            ${escapeHtml(q.a)}
+          </div>
+
+        </div>
+
+        <div class="translation">
+
+          <div class="translation-label">
+            🇨🇳 中文理解
+          </div>
+
+          <div>
+            ${escapeHtml(q.c)}
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="btn btn-blue"
+            type="button"
+            onclick="speakAnswer(${ti},${qi})">
+
+            🔊 播放答案
+
+          </button>
+
+          <button
+            class="btn btn-yellow"
+            type="button"
+            onclick="toggleFavorite(${ti},${qi})">
+
+            ❤️ 取消收藏
+
+          </button>
+
+          <button
+            class="btn btn-gray"
+            type="button"
+            onclick="openTopic(${ti})">
+
+            📚 打开话题
+
+          </button>
+
+        </div>
+
+      </article>
+
+    `);
+
+  });
+
+  container.innerHTML =
+    cards.length
+    ? cards.join("")
+    : `<div class="empty">
+         收藏记录中没有可显示的题目。
+       </div>`;
+}
+
+function buildQuestionList(){
+
+  allQuestions = [];
+
+  data.forEach((topic,ti)=>{
+
+    topic.questions.forEach((q,qi)=>{
+
+      allQuestions.push({
+
+        topic,
+
+        topicIndex:ti,
+
+        questionIndex:qi,
+
+        question:q
+
+      });
+
+    });
+
+  });
+}
+
+function newPracticeQuestion(){
+
+  if(!allQuestions.length){
+    return;
+  }
+
+  const random =
+    allQuestions[
+      Math.floor(
+        Math.random()*allQuestions.length
+      )
+    ];
+
+  currentPractice = random;
+
+  const topic =
+    document.getElementById("practiceTopic");
+
+  const question =
+    document.getElementById("practiceQuestion");
+
+  const input =
+    document.getElementById("practiceInput");
+
+  const answer =
+    document.getElementById("practiceAnswer");
+
+  if(topic){
+
+    topic.textContent =
+      `${random.topicIndex+1}. ${random.topic.topic} · ${random.topic.cn}`;
+
+  }
+
+  if(question){
+
+    question.textContent =
+      random.question.q;
+
+  }
+
+  if(input){
+
+    input.value = "";
+
+  }
+
+  if(answer){
+
+    answer.innerHTML = "";
+
+  }
+}
+
+function showPracticeAnswer(){
+
+  if(!currentPractice){
+    newPracticeQuestion();
+  }
+
+  if(!currentPractice){
+    return;
+  }
+
+  const q =
+    currentPractice.question;
+
+  const answer =
+    document.getElementById("practiceAnswer");
+
+  if(!answer) return;
+
+  answer.innerHTML = `
+
+    <div class="answer">
+
+      <div class="answer-label">
+        ⭐ Band 6.5 参考答案
+      </div>
+
+      <div>
+        ${escapeHtml(q.a)}
+      </div>
+
+    </div>
+
+    <div class="translation">
+
+      <div class="translation-label">
+        🇨🇳 中文理解
+      </div>
+
+      <div>
+        ${escapeHtml(q.c)}
+      </div>
+
+    </div>
+
+    <div class="vocab">
+
+      ${(q.v || [])
+        .map(v =>
+          `<span class="tag">
+            ${escapeHtml(v)}
+           </span>`
+        )
+        .join("")}
+
+    </div>
+
+  `;
+}
+
+function getEnglishVoice(){
+
+  if(!("speechSynthesis" in window)){
+    return null;
+  }
+
+  const voices =
+    window.speechSynthesis.getVoices();
+
+  return (
+
+    voices.find(
+      v => /^en-US$/i.test(v.lang)
+    )
+
+    ||
+
+    voices.find(
+      v => /^en-GB$/i.test(v.lang)
+    )
+
+    ||
+
+    voices.find(
+      v => /^en/i.test(v.lang)
+    )
+
+    ||
+
+    null
+
+  );
+}
+
+function speakText(text){
+
+  if(!("speechSynthesis" in window)){
+
+    alert(
+      "当前浏览器不支持语音播放。"
+    );
+
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(text);
+
+  utterance.lang =
+    "en-US";
+
+  utterance.rate =
+    0.88;
+
+  utterance.pitch =
+    1;
+
+  const voice =
+    getEnglishVoice();
+
+  if(voice){
+    utterance.voice = voice;
+  }
+
+  setTimeout(()=>{
+
+    window.speechSynthesis.speak(
+      utterance
+    );
+
+  },80);
+}
+
+function speakAnswer(topicIndex,questionIndex){
+
+  const q =
+    data[topicIndex]?.questions?.[questionIndex];
+
+  if(q){
+    speakText(q.a);
+  }
+}
+
+function listenPracticeQuestion(){
+
+  if(currentPractice){
+
+    speakText(
+      currentPractice.question.q
+    );
+
+  }else{
+
+    newPracticeQuestion();
+
+    if(currentPractice){
+
+      speakText(
+        currentPractice.question.q
+      );
+
+    }
+
+  }
+}
+
+function stopSpeech(){
+
+  if("speechSynthesis" in window){
+
+    window.speechSynthesis.cancel();
+
+  }
+}
+
+if("speechSynthesis" in window){
+
+  window.speechSynthesis.onvoiceschanged =
+    ()=>{};
+
+}
+
+function init(){
+
+  buildQuestionList();
+
+  renderTopics();
+
+  updateStats();
+
+  renderFavorites();
+
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>{
+      p.classList.remove("active");
+    });
+
+  const home =
+    document.getElementById("home");
+
+  if(home){
+    home.classList.add("active");
+  }
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
+
+</script>
+
+</body>
+
+</html>
+  
